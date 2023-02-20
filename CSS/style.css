@@ -1,18 +1,32 @@
+@font-face {
+    font-family:"retro";
+    src: url(./fonts/digital-7.ttf) format('truetype');
+    
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "retro";
+    
+}
+
+html {
+    background: url(/images/background.jpg) no-repeat center center / cover;
 }
 
 .title {
     text-align: center;
+    font-size: 5rem;
+    padding: 10px;
+    color: #BAFF39;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    background-color: #B6E1E7;
+    background-color: #6E6E6E;
     margin: 100px auto;
     height: 600px;
     width: 400px;
@@ -26,7 +40,7 @@
 }
 .screen {
     
-    background-color: #FAE7A5;
+    background-color:#BAFF39;
     width: 100%;
     height: 20%;
     border-radius: 10px;
@@ -100,7 +114,7 @@
 
 .buttons {
     /* align-self: left; */
-    background-color: #F9B872;
+    background-color: #FFFFFF;
     border: 1.5px solid black;
     box-shadow: 0 0 5px;
     text-align: center;

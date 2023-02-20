@@ -21,7 +21,13 @@ let allArray = []
 buttons.forEach((button) => {
     
     button.addEventListener('click', (e) => {
-       number = parseInt(e.target.textContent)
+       number = e.target.textContent
+       if (storedNumber.length === 0) {
+        screenDown.textContent = ""
+       }
+       if (storedSymbol[storedSymbol.length-1] === "ENTER"){
+        lastResult = number
+       }
        storedNumber.push(number)
        console.log(storedNumber)
        screenDown.textContent = screenDown.textContent + number
@@ -41,21 +47,12 @@ operationBtns.forEach((button) => {
         allArray.push(lastsymbol)
         pressOperator()
         console.log(allArray)
+        // console.log(lastsymbol)
     })
     
 })
 
 
-
-// function checkNumberOfSymbols (array) {
-//     if (array.length % 2 === 0){
-//         console.log ("even")
-//         return operationPending = true
-//     }else {
-//         console.log ("odd")
-//         return operationPending = false
-//     }
-// }
 
 function resetArray (name) {
     name.length = 0
@@ -88,20 +85,7 @@ function power (a,b){
     return parseFloat(a) ** parseFloat(b)
 }
 
-
-function pressOperator() {
-    
-    if (lastsymbol === "DELETE"){
-        resetArray(storedNumber)
-        resetArray(storedSymbol)
-        deleteScreen()
-        lastResult = 0
-    }
-    if (isNaN(allArray[allArray.length -1]) && isNaN(allArray[allArray.length -2]) && allArray[allArray.length - 1] != "DELETE"){
-        screenUp.textContent = lastResult + lastsymbol
-        return
-    }
-    
+function mainLogic(){
     if (storedNumber.length === 0 && !storedNumber.length <= 1) {
         console.log("empty number return")
         resetArray(storedSymbol)
@@ -115,7 +99,7 @@ function pressOperator() {
                 previousSymbol = storedSymbol[storedSymbol.length - 2]
             }
             console.log(previousSymbol)
-
+            
             switch (previousSymbol) {
                 case "+" :
                     lastResult = add(secondNumber,lastResult)
@@ -174,9 +158,51 @@ function pressOperator() {
                         screenUp.textContent = lastResult + lastsymbol
                     }
                     break
+                case "ENTER" :
+                    screenUp.textContent = lastResult + lastsymbol
+                    screenDown.textContent = ""
+                    lastResult = secondNumber
             }
 
     }
+}
+
+function pressOperator() {
+    
+    if (lastsymbol === "AC"){
+        resetArray(storedNumber)
+        resetArray(storedSymbol)
+        deleteScreen()
+        lastResult = 0
+        return
+    }
+    
+   if (lastsymbol === "ENTER"){
+        mainLogic()
+        screenUp.textContent = ""
+        screenDown.textContent = lastResult
+        resetArray(storedNumber)
+        return
+    }
+
+    // if (lastsymbol === "C"){
+    //     screenUp.textContent = lastResult + previousSymbol
+    //     resetArray(storedNumber)
+    //     screenDown.textContent = ""
+    //     storedNumber.pop()
+        
+    // }
+ 
+
+    if (isNaN(allArray[allArray.length -1]) && isNaN(allArray[allArray.length -2]) ){
+        
+        screenUp.textContent = lastResult + lastsymbol
+        
+        return
+    }
+    
+    mainLogic()
+    
 }    
 
     
