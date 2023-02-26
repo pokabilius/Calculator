@@ -8,19 +8,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+<<<<<<< HEAD
     font-family: "retro", sans-serif;
+=======
+    
+>>>>>>> a35915a3f806cecaef8a5f214d178544d39c9fa9
     
 }
 
-html {
-    background: url(/images/background.jpg) no-repeat center center / cover;
+body {
+    display: flex;
+    flex-direction: column;
+    background: url(../images/image.png) no-repeat center center / cover;
+    height: 100vh;
+    font-family: "retro";
+    justify-content: space-between;
 }
 
 .title {
     text-align: center;
-    font-size: 5rem;
+    font-size: 6rem;
     padding: 10px;
-    color: #BAFF39;
+    color:#6E6E6E;
+    margin-top: 10px;
+    /* font-weight: bold; */
+    
 }
 
 .container {
@@ -126,5 +138,15 @@ html {
 }
 
 
+.footer {
+    padding-bottom: 20px;
+    font-size: 3.5rem;
+    align-self: center;
+    color: #6E6E6E;
+    font-weight: bold;
+  }
 
+  #git {
+    color: #6E6E6E;
+  }
 

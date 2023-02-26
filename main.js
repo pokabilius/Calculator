@@ -3,6 +3,7 @@ const buttons = document.querySelectorAll(".numbers")
 const operationBtns = document.querySelectorAll(".symbols")
 const screenUp = document.querySelector("#up")
 const screenDown = document.querySelector("#down")
+const gitIcon = document.getElementById("git")
 let number = ""
 let lastsymbol = ""
 let previousSymbol = 0
@@ -15,6 +16,14 @@ let lastResult = 0
 let helpNumber = 0
 let operationPending = false
 let allArray = []
+
+gitIcon.addEventListener('mouseover', () => {
+    gitIcon.classList.add("fa-spin")
+})
+
+gitIcon.addEventListener('mouseout', () => {
+    gitIcon.classList.remove("fa-spin")
+})
 
 // Grab number from keys
 
@@ -29,7 +38,7 @@ buttons.forEach((button) => {
         lastResult = number
        }
        storedNumber.push(number)
-       console.log(storedNumber)
+    //    console.log(storedNumber)
        screenDown.textContent = screenDown.textContent + number
        allArray.push(number)
        
@@ -43,16 +52,15 @@ operationBtns.forEach((button) => {
     button.addEventListener('click', (e) => {
         lastsymbol = e.target.textContent
         storedSymbol.push(lastsymbol) 
-        console.log(storedSymbol)
+        // console.log(storedSymbol)
         allArray.push(lastsymbol)
         pressOperator()
-        console.log(allArray)
+        // console.log(allArray)
+        // console.log(lastsymbol)
         // console.log(lastsymbol)
     })
     
 })
-
-
 
 function resetArray (name) {
     name.length = 0
@@ -87,7 +95,7 @@ function power (a,b){
 
 function mainLogic(){
     if (storedNumber.length === 0 && !storedNumber.length <= 1) {
-        console.log("empty number return")
+        // console.log("empty number return")
         resetArray(storedSymbol)
         return
     } else {
@@ -98,7 +106,7 @@ function mainLogic(){
             } else {
                 previousSymbol = storedSymbol[storedSymbol.length - 2]
             }
-            console.log(previousSymbol)
+            // console.log(previousSymbol)
             
             switch (previousSymbol) {
                 case "+" :
@@ -125,22 +133,21 @@ function mainLogic(){
                         lastResult = secondNumber
                     }else {
                         lastResult = divide(lastResult,secondNumber)
-                        console.log(lastResult)
-                        console.log(secondNumber)
+                        // console.log(lastResult)
+                        // console.log(secondNumber)
                         screenDown.textContent = ""
                         screenUp.textContent = lastResult + lastsymbol
                     }
                     break
                 case "*" :
                     if (storedSymbol.length <= 1) {
-                        // helpNumber = secondNumber
                         screenDown.textContent = ""
                         screenUp.textContent = secondNumber + lastsymbol
                         lastResult = secondNumber
                     }else {
                         lastResult = multiply(lastResult,secondNumber)
-                        console.log(lastResult)
-                        console.log(secondNumber)
+                        // console.log(lastResult)
+                        // console.log(secondNumber)
                         screenDown.textContent = ""
                         screenUp.textContent = lastResult + lastsymbol
                     }
@@ -152,8 +159,8 @@ function mainLogic(){
                         lastResult = secondNumber
                     }else {
                         lastResult = power(lastResult,secondNumber)
-                        console.log(lastResult)
-                        console.log(secondNumber)
+                        // console.log(lastResult)
+                        // console.log(secondNumber)
                         screenDown.textContent = ""
                         screenUp.textContent = lastResult + lastsymbol
                     }
@@ -162,6 +169,10 @@ function mainLogic(){
                     screenUp.textContent = lastResult + lastsymbol
                     screenDown.textContent = ""
                     lastResult = secondNumber
+                    break
+                case "C" :
+                    console.log(lastResult)
+                    
             }
 
     }
@@ -185,24 +196,29 @@ function pressOperator() {
         return
     }
 
-    // if (lastsymbol === "C"){
-    //     screenUp.textContent = lastResult + previousSymbol
-    //     resetArray(storedNumber)
-    //     screenDown.textContent = ""
-    //     storedNumber.pop()
-        
-    // }
- 
-
-    if (isNaN(allArray[allArray.length -1]) && isNaN(allArray[allArray.length -2]) ){
-        
+    if (lastsymbol === "C"){
+        if (storedNumber.length === 0){
+            resetArray(storedNumber)
+            resetArray(storedSymbol)
+            deleteScreen()
+            lastResult = 0
+            return
+        }else {
+            storedSymbol.pop()
+            screenUp.textContent = lastResult + storedSymbol[storedSymbol.length-1]
+            screenDown.textContent = ""
+            resetArray(storedNumber)
+            console.log(storedSymbol)
+            console.log("enter C")
+            return
+        }
+    }else if (isNaN(allArray[allArray.length -1]) && isNaN(allArray[allArray.length -2]) ){
+        // console.log("error enter ")
         screenUp.textContent = lastResult + lastsymbol
-        
         return
     }
     
     mainLogic()
-    
 }    
 
     
