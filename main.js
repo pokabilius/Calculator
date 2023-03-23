@@ -38,10 +38,8 @@ buttons.forEach((button) => {
         lastResult = number
        }
        storedNumber.push(number)
-    //    console.log(storedNumber)
        screenDown.textContent = screenDown.textContent + number
        allArray.push(number)
-       
     })
 })
 
@@ -52,12 +50,8 @@ operationBtns.forEach((button) => {
     button.addEventListener('click', (e) => {
         lastsymbol = e.target.textContent
         storedSymbol.push(lastsymbol) 
-        // console.log(storedSymbol)
         allArray.push(lastsymbol)
         pressOperator()
-        // console.log(allArray)
-        // console.log(lastsymbol)
-        // console.log(lastsymbol)
     })
     
 })
@@ -69,7 +63,6 @@ function resetArray (name) {
 function deleteScreen () {
     screenUp.textContent = ""
     screenDown.textContent = ""
-
 }
 
 // Operation functions
@@ -95,7 +88,6 @@ function power (a,b){
 
 function mainLogic(){
     if (storedNumber.length === 0 && !storedNumber.length <= 1) {
-        // console.log("empty number return")
         resetArray(storedSymbol)
         return
     } else {
@@ -106,7 +98,6 @@ function mainLogic(){
             } else {
                 previousSymbol = storedSymbol[storedSymbol.length - 2]
             }
-            // console.log(previousSymbol)
             
             switch (previousSymbol) {
                 case "+" :
@@ -123,7 +114,6 @@ function mainLogic(){
                         lastResult = subtract(lastResult,secondNumber)
                         screenDown.textContent = ""
                         screenUp.textContent = lastResult + lastsymbol
-                        
                     }
                     break
                 case "/" :
@@ -133,8 +123,6 @@ function mainLogic(){
                         lastResult = secondNumber
                     }else {
                         lastResult = divide(lastResult,secondNumber)
-                        // console.log(lastResult)
-                        // console.log(secondNumber)
                         screenDown.textContent = ""
                         screenUp.textContent = lastResult + lastsymbol
                     }
@@ -146,8 +134,6 @@ function mainLogic(){
                         lastResult = secondNumber
                     }else {
                         lastResult = multiply(lastResult,secondNumber)
-                        // console.log(lastResult)
-                        // console.log(secondNumber)
                         screenDown.textContent = ""
                         screenUp.textContent = lastResult + lastsymbol
                     }
@@ -159,8 +145,6 @@ function mainLogic(){
                         lastResult = secondNumber
                     }else {
                         lastResult = power(lastResult,secondNumber)
-                        // console.log(lastResult)
-                        // console.log(secondNumber)
                         screenDown.textContent = ""
                         screenUp.textContent = lastResult + lastsymbol
                     }
@@ -170,11 +154,7 @@ function mainLogic(){
                     screenDown.textContent = ""
                     lastResult = secondNumber
                     break
-                case "C" :
-                    console.log(lastResult)
-                    
             }
-
     }
 }
 
@@ -213,7 +193,6 @@ function pressOperator() {
             return
         }
     }else if (isNaN(allArray[allArray.length -1]) && isNaN(allArray[allArray.length -2]) ){
-        // console.log("error enter ")
         screenUp.textContent = lastResult + lastsymbol
         return
     }
